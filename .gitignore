@@ -1,3 +1,4 @@
 next-env.d.ts
 yarn.lock
 node_modules
+.next

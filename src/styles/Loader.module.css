@@ -1,0 +1,34 @@
+.load{
+    border-top:3px solid #ffffff;
+    width: 1%;
+    visibility: visible;
+    animation: load-animation 0.8s ease-in forwards;
+    }
+    @keyframes load-animation {
+    12%  {
+        width: 0%;
+    }
+    36%{
+        width: 5%;
+    }
+    40%{
+        width: 20%;
+    }
+    60%  {
+        width: 40%;
+    }
+    70%{
+        width: 45%;
+    }
+    80%{
+        width: 90%;
+    }
+    100%{
+        visibility: hidden;
+        width: 100%;
+    }
+    100%{
+        visibility: hidden;
+        width: 100%;
+    }
+    }

@@ -5,28 +5,34 @@ import Header from '../../../components/Header/header'
 import Loader from '../../../components/Loader/loader'
 const inter = Inter({ subsets: ['latin'] })
 const baseurl = "http://127.0.0.1:3000"
-import { useRouter } from 'next/router'
-export default async function Home() {
-  const router = useRouter();
-  const getstation = router.asPath.slice(12)
-  async function fetchdata(){
-    const fetchstation = await (await fetch(baseurl + "/api/station/" + getstation)).json()
-    const stationname = fetchstation['station']['name']
-    return stationname;
+export const getServerSideProps = async ({params}) => {
+  const getparams = {params}
+  console.log(getparams)
+  const getstation = params['departures']
+  console.log(getstation)
+  const res  = await fetch(baseurl + "/api/station/" + getstation)
+  const data = await res.json()
+  const stationnameapiresult = data['station']['name']
+  let stationname: string = stationnameapiresult
+  return{
+    props: {
+      currentstation: stationname
+    }
   }
-  const data = await fetchdata()
-  return (
-    <>
-      <Head>
-        <title>{}</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-      </Head>
-      <Loader></Loader>
-      <Header></Header>
-      <main className={inter.className}>
-        <h1 className={styles.headline}>Daten werden geladen</h1>
-        <p className={styles.loadingtext}>Bahnhof {getstation} wird gesucht</p>
+}
+const Page = ({currentstation}) =>{
+return(
+  <>
+  <Head>
+  <title>Abfahrten in {currentstation}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+</Head>
+<main className={inter.className}>
+  <Loader></Loader>
+  <Header></Header>
+   <h1 className={styles.headline}>aktuelle Abfahrten in {currentstation}</h1>
 </main>
-    </>
-  )
-  }
+</>
+)
+}
+export default Page;

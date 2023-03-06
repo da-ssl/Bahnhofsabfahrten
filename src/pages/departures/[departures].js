@@ -9,7 +9,7 @@ export const getServerSideProps = async ({params}) => {
   console.log(getparams)
   const getstation = params['departures']
   console.log(getstation)
-  const res  = await fetch("https://departures.phipsiart.at/api/station/" + getstation)
+  const res  = await fetch("https://bahnhofsabfahrten.phipsiart.de/api/station/" + getstation)
   const data = await res.json()
   const stationname = data['station']['name']
   return{

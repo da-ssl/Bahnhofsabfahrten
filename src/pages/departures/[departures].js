@@ -13,15 +13,18 @@ export const getServerSideProps = async ({params}) => {
   const res  = await fetch("https://bahnhofsabfahrten.phipsiart.de/api/station/" + getstation)
   const data = await res.json()
   const stationname = data['station']['name']
-  const platforms = ""
+  const platforms = data['departures']['platform']
+  const lines = data['departures']['lines']
   return{
     props: {
       currentstation: stationname,
-      platform: platforms
+      platform: platforms,
+      line: lines
     }
   }
 }
-const Page = ({currentstation, platform}) =>{
+const Page = ({currentstation, platform, line}) =>{
+  console.log(platform)
 return(
   <>
   <Head>
@@ -32,7 +35,17 @@ return(
   <Loader></Loader>
   <Header></Header>
    <h1 className={styles.headline}>aktuelle Abfahrten in {currentstation}</h1>
-</main>
+   <div className={styles.departures}>
+   {platform.map(platform => <p key={platform.id} className={styles.platform}>
+    {platform}
+   </p>)}
+   </div>
+   <div className={styles.departures}>
+   {line.map(line => <p key={line.id} className={styles.platform}>
+    {line}
+   </p>)}
+   </div>
+   </main>
 </>
 )
 }

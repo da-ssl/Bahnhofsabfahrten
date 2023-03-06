@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google'
 import styles from '@/styles/Departures.module.css'
 import Header from '../../../components/Header/header'
 import Loader from '../../../components/Loader/loader'
+var _ = require('lodash')
 const inter = Inter({ subsets: ['latin'] })
 const baseurl = "http://127.0.0.1:3000"
 export const getServerSideProps = async ({params}) => {
@@ -13,13 +14,15 @@ export const getServerSideProps = async ({params}) => {
   const res  = await fetch(baseurl + "/api/station/" + getstation)
   const data = await res.json()
   const stationname = data['station']['name']
+  const platforms = ""
   return{
     props: {
-      currentstation: stationname
+      currentstation: stationname,
+      platform: platforms
     }
   }
 }
-const Page = ({currentstation}) =>{
+const Page = ({currentstation, platform}) =>{
 return(
   <>
   <Head>

@@ -12,8 +12,7 @@ export const getServerSideProps = async ({params}) => {
   console.log(getstation)
   const res  = await fetch(baseurl + "/api/station/" + getstation)
   const data = await res.json()
-  const stationnameapiresult = data['station']['name']
-  let stationname: string = stationnameapiresult
+  const stationname = data['station']['name']
   return{
     props: {
       currentstation: stationname

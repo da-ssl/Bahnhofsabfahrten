@@ -10,14 +10,14 @@ const inter = Inter({ subsets: ['latin'] })
 export default function Home() {
   const router = useRouter();
   function searchstation(){
-  const getsearchvalue = document.getElementById("searchvalue").value
-  const redirecturl = "/departures/" + getsearchvalue
+    let getsearchvalue : string = (document.getElementById("searchvalue") as HTMLInputElement).value;
+    const redirecturl = "/departures/" + getsearchvalue
   router.push(redirecturl)
-  }
+}
   return (
     <>
       <Head>
-        <title>Bahnhofsabfahrten</title>
+        <title>Phipsiart</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <Loader></Loader>

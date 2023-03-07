@@ -27,9 +27,10 @@ console.log(error)
   const getlines = _.map(fetchdeparturesresult, 'line')
   const lines = _.map(getlines, 'name')
   const delays = _.map(fetchdeparturesresult, 'delay') ;
-  const planneddepartures = _.map(fetchdeparturesresult, 'when')
+  const planneddeparturesapiresult = _.map(fetchdeparturesresult, 'plannedWhen')
   const destination = _.map(fetchdeparturesresult, 'direction')
   const platform = _.map(fetchdeparturesresult, 'platform')
+  var planneddepartures = planneddeparturesapiresult.map((planneddeparturesapiresult: string) => planneddeparturesapiresult.substring(11).substring(0,5)) 
   return(
   res.status(200).json({
     station: {

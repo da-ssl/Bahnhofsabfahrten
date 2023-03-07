@@ -6,24 +6,25 @@ var _ = require('lodash')
 const inter = Inter({ subsets: ['latin'] })
 export const getServerSideProps = async ({params}) => {
   const getparams = {params}
-  console.log(getparams)
   const getstation = params['departures']
-  console.log(getstation)
   const res  = await fetch("https://bahnhofsabfahrten.phipsiart.de/api/station/" + getstation)
   const data = await res.json()
   const stationname = data['station']['name']
   const platforms = data['departures']['platform']
   const lines = data['departures']['lines']
+  const destinationapiresult = data['departures']['destination']
+  const departuresapiresult = data['departures']['planneddepartures']
   return{
     props: {
       currentstation: stationname,
       platform: platforms,
-      line: lines
+      line: lines,
+      destination: destinationapiresult,
+      departure: departuresapiresult
     }
   }
 }
-const Page = ({currentstation, platform, line}) =>{
-  console.log(platform)
+const Page = ({currentstation, platform, line, destination, departure}) =>{
 return(
   <>
   <Head>
@@ -33,17 +34,54 @@ return(
 <main className={inter.className}>
   <Header></Header>
    <h1 className={styles.headline}>aktuelle Abfahrten in {currentstation}</h1>
-   <div className={styles.departures}>
-   {platform.map(platform => <p key={platform.id} className={styles.platform}>
-    {platform}
-   </p>)}
-   </div>
-   <div className={styles.departures}>
-   {line.map(line => <p key={line.id} className={styles.platform}>
-    {line}
-   </p>)}
-   </div>
+   {/*Start der aktuellen Abfahrten */}
    </main>
+   <div className={inter.className}>
+    <div className={styles.departures}>
+    <div className={styles.wrapper}>
+      <div className={styles.line}>
+      <p className={styles.info}>Linie</p>
+    {line.map((line, key) => {
+          return (
+            <p className={styles.departures} key={key}>
+              {line}
+            </p>
+          )
+        })}
+      </div>
+      <div className={styles.destination}>
+      <p className={styles.info}>Ziel</p>
+    {destination.map((destination, key) => {
+          return (
+            <p className={styles.ziel} key={key}>
+              {destination}
+            </p>
+          )
+        })}
+      </div>
+      <div className={styles.departure}>
+      <p className={styles.info}>Abfahrt</p>
+    {departure.map((departure, key) => {
+          return (
+            <p className={styles.abfahrt} key={key}>
+              {departure}
+            </p>
+          )
+        })}
+      </div>
+      <div className={styles.platform}>
+      <p className={styles.info}>Gleis</p>
+    {platform.map((platform, key) => {
+          return (
+            <p className={styles.gleis} key={key}>
+              {platform}
+            </p>
+          )
+        })}
+      </div>
+    </div>
+    </div>
+   </div>
 </>
 )
 }

@@ -2,7 +2,6 @@ import Head from 'next/head'
 import Image from 'next/image'
 import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
-import Loader from '../../components/Loader/loader'
 import Header from '../../components/Header/header'
 import { useRouter } from 'next/router'
 const inter = Inter({ subsets: ['latin'] })
@@ -20,7 +19,6 @@ export default function Home() {
         <title>Phipsiart</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
-      <Loader></Loader>
       <Header></Header>
       <main className={inter.className}>
         <h1 className={styles.headline}>Bahnhofsabfahrten</h1>

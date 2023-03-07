@@ -2,7 +2,6 @@ import Head from 'next/head'
 import { Inter } from 'next/font/google'
 import styles from '@/styles/Departures.module.css'
 import Header from '../../../components/Header/header'
-import Loader from '../../../components/Loader/loader'
 var _ = require('lodash')
 const inter = Inter({ subsets: ['latin'] })
 export const getServerSideProps = async ({params}) => {
@@ -32,7 +31,6 @@ return(
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 </Head>
 <main className={inter.className}>
-  <Loader></Loader>
   <Header></Header>
    <h1 className={styles.headline}>aktuelle Abfahrten in {currentstation}</h1>
    <div className={styles.departures}>

@@ -14,17 +14,19 @@ export const getServerSideProps = async ({params}) => {
   const lines = data['departures']['lines']
   const destinationapiresult = data['departures']['destination']
   const departuresapiresult = data['departures']['planneddepartures']
+  const delays = data['departures']['delays']
   return{
     props: {
       currentstation: stationname,
       platform: platforms,
       line: lines,
       destination: destinationapiresult,
-      departure: departuresapiresult
+      departure: departuresapiresult,
+      delay: delays
     }
   }
 }
-const Page = ({currentstation, platform, line, destination, departure}) =>{
+const Page = ({currentstation, platform, line, destination, departure, delay}) =>{
 return(
   <>
   <Head>
@@ -75,6 +77,16 @@ return(
           return (
             <p className={styles.gleis} key={key}>
               {platform}
+            </p>
+          )
+        })}
+      </div>
+      <div className={styles.delays}>
+      <p className={styles.info}>Verspätung in Sekunden</p>
+    {delay.map((delay, key) => {
+          return (
+            <p className={styles.verspaetung} key={key}>
+            {delay}
             </p>
           )
         })}

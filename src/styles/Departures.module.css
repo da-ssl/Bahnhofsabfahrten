@@ -21,6 +21,8 @@
 .departures{
     color: rgb(255, 255, 255);
     padding-left: 10px;
+    display: flex;
+    justify-content: center;
 }
 .info{
     padding-left: 10px;
@@ -53,5 +55,14 @@
     margin-left: 30px;
 }
 .abfahrt{
+    margin-bottom: 0;
+}
+
+.delays{
+    color: rgb(255, 255, 255);
+    font-size: 1.4em;
+    margin-left: 30px;
+}
+.verspaetung{
     margin-bottom: 0;
 }

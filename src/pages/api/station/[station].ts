@@ -26,10 +26,14 @@ console.log(error)
   var fetchdeparturesresult = JSON.parse("" + departuresconvert + "");
   const getlines = _.map(fetchdeparturesresult, 'line')
   const lines = _.map(getlines, 'name')
-  const delays = _.map(fetchdeparturesresult, 'delay') ;
+  const delaysapiresult = _.map(fetchdeparturesresult, 'delay') ;
   const planneddeparturesapiresult = _.map(fetchdeparturesresult, 'plannedWhen')
   const destination = _.map(fetchdeparturesresult, 'direction')
   const platform = _.map(fetchdeparturesresult, 'platform')
+  const delaysconvert = JSON.stringify(delaysapiresult,
+    (key, value) => (value === 0) ? 'pünktlich' : value,
+  );
+  var delays = JSON.parse("" + delaysconvert + "");
   var planneddepartures = planneddeparturesapiresult.map((planneddeparturesapiresult: string) => planneddeparturesapiresult.substring(11).substring(0,5)) 
   return(
   res.status(200).json({

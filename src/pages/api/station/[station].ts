@@ -19,7 +19,11 @@ export default async function getData(req: NextApiRequest, res: NextApiResponse)
   const fetchdepartures = await (await fetch(instance + "/stops/" + IBNR + "/departures?results=10&taxi=false&tram=false&bus=false&duration=1280")).json().catch(error=>{
 console.log(error)
   });
-  const fetchdeparturesresult = fetchdepartures['departures']
+  const fetchdeparturesapiresult = fetchdepartures['departures']
+  const departuresconvert = JSON.stringify(fetchdeparturesapiresult,
+    (key, value) => (value === null) ? '' : value
+  );
+  var fetchdeparturesresult = JSON.parse("" + departuresconvert + "");
   const getlines = _.map(fetchdeparturesresult, 'line')
   const lines = _.map(getlines, 'name')
   const delays = _.map(fetchdeparturesresult, 'delay') ;

@@ -20,8 +20,15 @@ export default async function getData(req: NextApiRequest, res: NextApiResponse)
 console.log(error)
   });
   const fetchdeparturesapiresult = fetchdepartures['departures']
-  const departuresconvert = JSON.stringify(fetchdeparturesapiresult,
-    (key, value) => (value === null) ? '' : value
+  var date = new Date(); 
+  var time = date.getDate() + "."
+   + (date.getMonth()+1)  + "." 
+   + date.getFullYear() + " um "  
+   + date.getHours() + ":"  
+   + date.getMinutes() + ":" 
+   + date.getSeconds();
+    const departuresconvert = JSON.stringify(fetchdeparturesapiresult,
+    (key, value) => (value === null) ? 'n/a' : value
   );
   var fetchdeparturesresult = JSON.parse("" + departuresconvert + "");
   const getlines = _.map(fetchdeparturesresult, 'line')
@@ -33,7 +40,23 @@ console.log(error)
   const delaysconvert = JSON.stringify(delaysapiresult,
     (key, value) => (value === 0) ? 'pünktlich' : value,
   );
-  var delays = JSON.parse("" + delaysconvert + "");
+  var delayswithoutminutes = JSON.parse("" + delaysconvert + "");
+  let delays = [];
+  for (let i = 0; i < delayswithoutminutes.length; i++) {
+    if (typeof delayswithoutminutes[i] === "number") {
+      let result = delayswithoutminutes[i] / 60;
+      if (result > 1) {
+          delays.push(result.toString() + " Minuten");
+      } else if (result < 2){
+        delays.push(result.toString() + " Minute");
+
+      } else {
+          delays.push(result.toString());
+      }
+  } else {
+      delays.push(delayswithoutminutes[i]);
+  }
+  }
   var planneddepartures = planneddeparturesapiresult.map((planneddeparturesapiresult: string) => planneddeparturesapiresult.substring(11).substring(0,5)) 
   return(
   res.status(200).json({
@@ -46,8 +69,11 @@ console.log(error)
       destination,
       platform,
        planneddepartures,
-       delays
+       delays,
+    },
+    info:{
+      "created-on": time
     }
   })
   )
-}
+  }

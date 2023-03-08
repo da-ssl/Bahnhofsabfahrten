@@ -66,3 +66,26 @@
 .verspaetung{
     margin-bottom: 0;
 }
+.refreshbutton{
+    background: none;
+    border: none;
+    font-size: 0.8em;
+    color: rgb(107, 105, 105);
+  }
+  .refreshbutton:hover{
+    background: none;
+    border: none;
+    font-size: 0.8em;
+    color: #27d;
+  }
+  .footer{
+    position: fixed;
+    font-size: 0.8em;
+    display: flex;
+    justify-content: center;
+    bottom: 0;
+    margin-bottom: 3px;
+    margin-left: 10px;
+    width: 100%;
+    color: rgb(255, 255, 255);
+  }

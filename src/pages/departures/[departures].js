@@ -2,6 +2,7 @@ import Head from 'next/head'
 import { Inter } from 'next/font/google'
 import styles from '@/styles/Departures.module.css'
 import Header from '../../../components/Header/header'
+import { useRouter } from 'next/router'
 var _ = require('lodash')
 const inter = Inter({ subsets: ['latin'] })
 export const getServerSideProps = async ({params}) => {
@@ -15,6 +16,8 @@ export const getServerSideProps = async ({params}) => {
   const destinationapiresult = data['departures']['destination']
   const departuresapiresult = data['departures']['planneddepartures']
   const delays = data['departures']['delays']
+
+  const lastupdateddata = data['info']['created-on']
   return{
     props: {
       currentstation: stationname,
@@ -22,11 +25,17 @@ export const getServerSideProps = async ({params}) => {
       line: lines,
       destination: destinationapiresult,
       departure: departuresapiresult,
-      delay: delays
+      delay: delays,
+      lastupdated : lastupdateddata
     }
   }
 }
-const Page = ({currentstation, platform, line, destination, departure, delay}) =>{
+const Page = ({currentstation, platform, line, destination, departure, delay, lastupdated}) =>{
+  const router = useRouter();
+  function refreshdata(){
+    router.replace(router.asPath);
+  }
+  
 return(
   <>
   <Head>
@@ -82,7 +91,7 @@ return(
         })}
       </div>
       <div className={styles.delays}>
-      <p className={styles.info}>Verspätung in Sekunden</p>
+      <p className={styles.info}>Verspätung</p>
     {delay.map((delay, key) => {
           return (
             <p className={styles.verspaetung} key={key}>
@@ -92,6 +101,11 @@ return(
         })}
       </div>
     </div>
+    </div>
+    <div className={styles.footer}>
+      <footer>
+        <span>Daten von  {lastupdated} Daten <button onClick={refreshdata} className={styles.refreshbutton}>aktualisieren</button> Alle Angaben ohne Gewähr.</span>
+      </footer>
     </div>
    </div>
 </>

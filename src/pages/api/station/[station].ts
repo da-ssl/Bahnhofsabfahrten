@@ -57,6 +57,27 @@ console.log(error)
       delays.push(delayswithoutminutes[i]);
   }
   }
+  let converttonumbers = delays.map(function(item) {
+    if (item === 'pünktlich') {
+        return 0;
+    } else if (item.includes('Minute')) {
+        return parseInt(item);
+    } else if (item.includes('Minuten')) {
+        return parseInt(item);
+    } else {
+        return item;
+    }
+});
+  let delaycolor: (number | string)[] = converttonumbers;
+  let delaycolorresult = delaycolor.map(function(item: number | string) {
+      if (item === "n/a") {
+          return "white";
+      } else if (typeof item === "number" && item > 4) {
+          return "red";
+      } else {
+          return "green";
+      }
+  });
   var planneddepartures = planneddeparturesapiresult.map((planneddeparturesapiresult: string) => planneddeparturesapiresult.substring(11).substring(0,5)) 
   return(
   res.status(200).json({
@@ -70,6 +91,7 @@ console.log(error)
       platform,
        planneddepartures,
        delays,
+       delaycolorresult,
     },
     info:{
       "created-on": time

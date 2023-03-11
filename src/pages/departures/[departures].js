@@ -16,21 +16,22 @@ export const getServerSideProps = async ({params}) => {
   const destinationapiresult = data['departures']['destination']
   const departuresapiresult = data['departures']['planneddepartures']
   const delays = data['departures']['delays']
-
+  const colorofdelays = data['departures']['delaycolorresult']
   const lastupdateddata = data['info']['created-on']
   return{
     props: {
       currentstation: stationname,
+      delaycolor : colorofdelays,
       platform: platforms,
       line: lines,
       destination: destinationapiresult,
       departure: departuresapiresult,
       delay: delays,
-      lastupdated : lastupdateddata
+      lastupdated : lastupdateddata,
     }
   }
 }
-const Page = ({currentstation, platform, line, destination, departure, delay, lastupdated}) =>{
+const Page = ({currentstation, platform, line, destination, departure, delay, lastupdated, delaycolor}) =>{
   const router = useRouter();
   function refreshdata(){
     router.replace(router.asPath);
@@ -91,15 +92,19 @@ return(
         })}
       </div>
       <div className={styles.delays}>
-      <p className={styles.info}>Verspätung</p>
-    {delay.map((delay, key) => {
-          return (
-            <p className={styles.verspaetung} key={key}>
-            {delay}
-            </p>
-          )
-        })}
-      </div>
+  <p className={styles.info}>Verspätung</p>
+  {delay.map((delay, key) => {
+    return (
+      <p
+        className={styles.verspaetung}
+        key={key}
+        style={{ color: delaycolor[key] }}
+      >
+        {delay}
+      </p>
+    );
+  })}
+</div>
     </div>
     </div>
     <div className={styles.footer}>

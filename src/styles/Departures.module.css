@@ -33,6 +33,7 @@
     grid-template-columns: 150px 300px 200px 300px;
     display:inline-flex;
 }
+
 .destination{
     color: rgb(255, 255, 255);
     font-size: 1.4em;

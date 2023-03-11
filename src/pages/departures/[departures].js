@@ -8,7 +8,7 @@ const inter = Inter({ subsets: ['latin'] })
 export const getServerSideProps = async ({params}) => {
   const getparams = {params}
   const getstation = params['departures']
-  const res  = await fetch("https://bahnhofsabfahrten.phipsiart.de/api/station/" + getstation)
+  const res  = await fetch("http://127.0.0.1:3000/api/station/" + getstation)
   const data = await res.json()
   const stationname = data['station']['name']
   const platforms = data['departures']['platform']

@@ -3,8 +3,22 @@ import {NextApiResponse} from "next"
 var _ = require('lodash')
 export default async function getData(req: NextApiRequest, res: NextApiResponse) {
   const instance = "https://transport.phipsiart.de"
-  const station = req.query['station']
-  const fetchstationurl = instance + "/locations?poi=false&addresses=false&query=" + station
+
+  let station: string = "";
+  let results: string = "1";
+  
+  let reqparams: string | string[] | undefined = req.query["station"];
+  if (typeof reqparams === "string") {
+    [station, results] = reqparams.split("&");
+  } else if (Array.isArray(reqparams)) {
+
+  } else {
+
+  }
+  console.log(station)
+  console.log(results)
+  // You can now use station and results here
+    const fetchstationurl = instance + "/locations?poi=false&addresses=false&query=" + station
   const fetchstation = await (await fetch(fetchstationurl)).json().catch(error=>{
        res.status(500).json({
         station: {
@@ -16,7 +30,7 @@ export default async function getData(req: NextApiRequest, res: NextApiResponse)
   const stationdata = fetchstation[0]
   const IBNR = stationdata['id']
   const name = stationdata['name']
-  const fetchdepartures = await (await fetch(instance + "/stops/" + IBNR + "/departures?results=10&taxi=false&tram=false&bus=false&duration=1280")).json().catch(error=>{
+  const fetchdepartures = await (await fetch(instance + "/stops/" + IBNR + "/departures?"+ results +"&taxi=false&tram=false&bus=false&duration=1490")).json().catch(error=>{
 console.log(error)
   });
   const fetchdeparturesapiresult = fetchdepartures['departures']

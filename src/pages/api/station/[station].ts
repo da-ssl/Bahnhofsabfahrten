@@ -15,9 +15,6 @@ export default async function getData(req: NextApiRequest, res: NextApiResponse)
   } else {
 
   }
-  console.log(station)
-  console.log(results)
-  // You can now use station and results here
     const fetchstationurl = instance + "/locations?poi=false&addresses=false&query=" + station
   const fetchstation = await (await fetch(fetchstationurl)).json().catch(error=>{
        res.status(500).json({

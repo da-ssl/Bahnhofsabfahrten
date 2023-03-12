@@ -23,49 +23,11 @@
     padding-left: 10px;
     display: flex;
     justify-content: center;
+    font-size: 1.3em;
 }
 .info{
     padding-left: 10px;
     font-weight: bold;
-}
-.wrapper{
-    display: grid;
-    grid-template-columns: 150px 300px 200px 300px;
-    display:inline-flex;
-}
-
-.destination{
-    color: rgb(255, 255, 255);
-    font-size: 1.4em;
-    margin-left: 30px;
-}
-.ziel{
-    margin-bottom: 0;
-}
-.platform{
-    color: rgb(255, 255, 255);
-    font-size: 1.4em;
-    margin-left: 30px;
-}
-.gleis{
-    margin-bottom: 0;
-}
-.departure{
-    color: rgb(255, 255, 255);
-    font-size: 1.4em;
-    margin-left: 30px;
-}
-.abfahrt{
-    margin-bottom: 0;
-}
-
-.delays{
-    color: rgb(255, 255, 255);
-    font-size: 1.4em;
-    margin-left: 30px;
-}
-.verspaetung{
-    margin-bottom: 0;
 }
 .refreshbutton{
     background: none;

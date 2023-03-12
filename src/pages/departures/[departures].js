@@ -13,15 +13,17 @@ export const getServerSideProps = async ({params}) => {
   const departuredata = data['result']
   const delaycolor = data['delaycolorresult']
   const creationdate = data['createdon']
+  const stationname = data['stationname']
   return{
     props: {
       departuredataresponse : departuredata,
       delayColorResult: delaycolor,
-      createdon: creationdate
+      createdon: creationdate,
+      station: stationname
     }
   }
 }
-const Page = ({departuredataresponse, delayColorResult, createdon}) =>{
+const Page = ({departuredataresponse, delayColorResult, createdon, station}) =>{
   const router = useRouter();
   function refreshdata(){
     router.replace(router.asPath);
@@ -30,17 +32,15 @@ const Page = ({departuredataresponse, delayColorResult, createdon}) =>{
 return(
   <>
   <Head>
-  <title>Abfahrten in </title>
+  <title>Abfahrten in {station}</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 </Head>
 <main className={inter.className}>
   <Header></Header>
-   <h1 className={styles.headline}>aktuelle Abfahrten in </h1>
-   {/*Start der aktuellen Abfahrten */}
+   <h1 className={styles.headline}>aktuelle Abfahrten in {station} </h1>
    </main>
    <div className={inter.className}>
     <div className={styles.departures}>
-    {/*Start der Tabelle */}
     <table>
     <thead>
   <tr>

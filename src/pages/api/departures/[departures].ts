@@ -24,6 +24,7 @@ const fetchdepartures = await (await fetch(fetchdeparturesurl)).json()
   let delays = fetchdepartures['departures']['delays']
   const delaycolorresult = fetchdepartures['departures']['delaycolorresult']
   const createdon = fetchdepartures['info']['created-on']
+  const stationname = fetchdepartures['station']['name']
   let result: {[key: number]: string[]} = {};
   
   for (let i = 0; i < delays.length; i++) {
@@ -35,7 +36,8 @@ const fetchdepartures = await (await fetch(fetchdeparturesurl)).json()
     res.status(200).json({
         result,
         delaycolorresult,
-        createdon
+        createdon,
+        stationname
     })
     )
     }

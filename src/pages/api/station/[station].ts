@@ -27,7 +27,7 @@ export default async function getData(req: NextApiRequest, res: NextApiResponse)
   const stationdata = fetchstation[0]
   const IBNR = stationdata['id']
   const name = stationdata['name']
-  const fetchdepartures = await (await fetch(instance + "/stops/" + IBNR + "/departures?"+ results +"&taxi=false&tram=false&bus=false&duration=1490")).json().catch(error=>{
+  const fetchdepartures = await (await fetch(instance + "/stops/" + IBNR + "/departures?"+ results +"&taxi=false&tram=false&bus=false&duration=10000")).json().catch(error=>{
 console.log(error)
   });
   const fetchdeparturesapiresult = fetchdepartures['departures']

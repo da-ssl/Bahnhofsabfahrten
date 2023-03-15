@@ -39,7 +39,7 @@ console.log(error)
    + date.getMinutes() + ":" 
    + date.getSeconds();
     const departuresconvert = JSON.stringify(fetchdeparturesapiresult,
-    (key, value) => (value === null) ? 'n/a' : value
+    (key, value) => (value === null) ? '\u00A0' : value
   );
   var fetchdeparturesresult = JSON.parse("" + departuresconvert + "");
   const getlines = _.map(fetchdeparturesresult, 'line')
@@ -81,7 +81,7 @@ console.log(error)
 });
   let delaycolor: (number | string)[] = converttonumbers;
   let delaycolorresult = delaycolor.map(function(item: number | string) {
-      if (item === "n/a") {
+      if (item === "\u00A0") {
           return "white";
       } else if (typeof item === "number" && item > 4) {
           return "red";

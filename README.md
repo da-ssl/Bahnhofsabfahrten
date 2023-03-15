@@ -51,7 +51,7 @@ Bahnhofsabfahrten is a project that displays current departures at train station
 
   
 
-Before starting :checkered_flag:, you need to have [Git](https://git-scm.com) and [Node](https://nodejs.org/en/) installed.
+Before starting :checkered_flag:, you need to have [Git](https://git-scm.com), [Node](https://nodejs.org/en/) and a package manager like [Yarn](https://yarnpkg.com/) installed.
 
   
 

@@ -31,7 +31,7 @@
 ## :dart: About ##
 
   
-Phipsiart Station Departures is a project that displays current departures at train stations, currently only in Germany. It is currently in the early development phase.
+Bahnhofsabfahrten is a project that displays current departures at train stations, currently only in Germany. It is currently in the early development phase.
 
   
 
@@ -43,7 +43,7 @@ Phipsiart Station Departures is a project that displays current departures at tr
 
 :heavy_check_mark: shows the current delays for all trains at the selected station, if available
 
-:heavy_check_mark: very fast and easy to use;
+:heavy_check_mark: very fast and easy to use
 
   
 
